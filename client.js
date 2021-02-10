@@ -4,15 +4,21 @@ const net = require('net');
  */
 const connect = function() {
   const conn = net.createConnection({ 
-    host: '10.0.2.15',
+    host: 'localhost',
     port: 50541
   });
   // interpret incoming data as text
   conn.setEncoding('utf8'); 
-
-  conn.on('data',function(){
+  
+  conn.on('connect', function() {
+    console.log("Successfully connected to game server");
+    conn.write("Name: KVP");
+  });
+  
+  conn.on('data', function() {
     console.log("you ded cuz you idled");
   });
+  
 
   return conn;
 }
